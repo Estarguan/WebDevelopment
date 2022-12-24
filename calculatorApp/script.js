@@ -60,9 +60,8 @@ function handleMath(symbol){
     buffer = '0';
 }
 function flushOperation(intBuffer){
-    if(previousOperation==='+'){
+    if(previousOperator==='+'){
         runningTotal += intBuffer;
-        console.log("hello");
     }else if (previousOperator === '−'){
         runningTotal -= intBuffer;
     }else if (previousOperator === '×'){
