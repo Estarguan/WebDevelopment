@@ -1,4 +1,4 @@
-import React, {useState } from 'react';
+import React, {useState, useRef} from 'react';
 import './App.css';
 
 function App() {
@@ -6,42 +6,84 @@ function App() {
   const [isShown, setIsShown] = useState(false);
   const [doList, setDoList] = useState([]);
   const [editingIndex, setEditingIndex] = useState(-1);
+  const [task,setTask] = useState('');
+  const [date, setDate] = useState('');
   //const [removalIndex, setRemovalIndex] = useState(-1);
 
   const add = () => {
+    if (editingIndex !== -1){
+      setEditingIndex(-1);
+      editTaskInputRef.current.value = '';
+      editDateInputRef.current.value = '';
+    }
     setIsShown(true);
   };
 
   const listupdate = (event) => {
-    if (event.key === 'Enter') {
-      if (event.target.value !== '') {
-        doList.push(event.target.value);
-        setDoList(doList);
-        setList(true);
-        setIsShown(false);
-        event.target.value = '';
-      }
+    if (event.target.value !== '') {
+      setTask(event.target.value)
     }
   };
 
-  const saveChanges = (event) => {
+  const dateUpdate = (event) => {
+    if (event.target.value !== ''){
+      setDate(event.target.value)
+    }
+  }
+  const editTaskInputRef = useRef(null);
+  const editDateInputRef = useRef(null);
+  const taskInputRef = useRef(null);  // Create a reference to the task input element
+  const dateInputRef = useRef(null);  // Create a reference to the date input element
+
+  const addTask = () => {
+    if (task !== '' && date !== ''){
+      doList.push({task:task, date:date});
+      setDoList(doList);
+      setList(true);
+      setIsShown(false);
+      setDate('');
+      setTask('');
+      taskInputRef.current.value = '';  // Clear the value of the task input element
+      dateInputRef.current.value = '';  // Clear the value of the date input element
+    }
+  }
+  const editTask = (event) => {
     if (event.key === 'Enter') {
       if (event.target.value !== '') {
         const updatedDoList = [...doList];
-        updatedDoList[editingIndex] = event.target.value;
+        updatedDoList[editingIndex].task = event.target.value;
+        event.target.value = '';
         setDoList(updatedDoList);
         setEditingIndex(-1);
       }
     }
   };
+  const editDate = (event) => {
+    if (event.key === 'Enter'){
+      if (event.target.value !==''){
+        const updatedDoList = [...doList];
+        updatedDoList[editingIndex].date = event.target.value;
+        event.target.value = '';
+        setDoList(updatedDoList);
+        setEditingIndex(-1);
+      }
+    }
+  }
 
+  const cancel = () => {
+    setEditingIndex(-1);
+    setIsShown(false)
+    editDateInputRef.current.value ='';
+    editTaskInputRef.current.value='';
+    taskInputRef.current.value='';
+    dateInputRef.current.value='';
+  }
   const remove = (index) => {
     const updatedDoList = [...doList];
     updatedDoList.splice(index,1)
     setDoList(updatedDoList)
   }
   return (
-
     <div className="App">
       <h1>Welcome to my to do app</h1>
       <section>
@@ -54,26 +96,59 @@ function App() {
         className="input"
         style={{ display: isShown ? 'block' : 'none' }}
         type="text"
-        onKeyPress={listupdate}
+        onChange={listupdate}
+        ref={taskInputRef}
       ></input>
-      
+      <input
+        className="input"
+        style={{ display: isShown ? 'block' : 'none' }}
+        type="date"
+        onChange={dateUpdate}
+        ref={dateInputRef}
+      ></input>
+      <button
+        style={{ display: isShown ? 'block' : 'none' }}
+        className="add-button"
+        onClick={addTask}
+      >
+        Add Task
+      </button>
       {/* editing */}
       <input
         placeholder="Edit task"
         className="input"
         style={{ display: editingIndex !== -1 ? 'block' : 'none' }}
         type="text"
-        onKeyPress={saveChanges}
+        onKeyDown={editTask}
+        ref={editTaskInputRef}
       ></input>
-      
+       <input
+        className="input"
+        style={{ display: editingIndex !== -1 ? 'block' : 'none' }}
+        type="date"
+        onKeyDown={editDate}
+        ref={editDateInputRef}
+      ></input>
+      <button
+        style={{display:editingIndex !== -1 || isShown ? 'block':'none'}} 
+        className='cancel-button'
+        onClick={cancel}
+        >
+          <strong>Cancel</strong>
+      </button>
       {/* displaying */}
       <ol style={{ display: list ? 'inline' : 'none' }}>
         {doList.map((item, i) => (
           <li key={i}>
-            {item}
+            <b>{item.task}</b> <br />
+            <i>{item.date}</i>
             {/* editing button */}
-            <button className='edit-button' onClick={() => setEditingIndex(i)}>Edit</button>
-            <button className='edit-button' onClick={() => {remove(i)}}>Remove</button>
+            <button className="edit-button" onClick={() => setEditingIndex(i)}>
+              Edit
+            </button>
+            <button className="edit-button" onClick={() => { remove(i); }}>
+              Remove
+            </button>
           </li>
         ))}
       </ol>

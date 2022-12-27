@@ -24,7 +24,7 @@
 .Add{
   background-color: aqua;
   margin: 20px;
-  margin-bottom: -20px;
+  margin-bottom: 20px;
   border-radius: 6px;
   height: 30px;
   width: 30px;
@@ -32,15 +32,23 @@
 }
 .input{
   display: none;
-  margin: 20px;
-  margin-top: 20px;
+  margin-bottom: 10px;
   border-radius: 10px;
   width: 300px;
-  height:30px;
+  height:20px;
 }
 
 .edit-button{
   background-color: black;
   color: white;
   margin: 5px;
+}
+.cancel-button {
+  background-color: black;
+  color:white;
+  margin-top: 5px;
+}
+.add-button {
+  background-color: white;
+  color: black;
 }
