@@ -1,5 +1,5 @@
 let runningTotal = 0;
-let buffer = "0";
+let buffer = "100";
 let previousOperator;
 
 const screen = document.querySelector('.screen');
