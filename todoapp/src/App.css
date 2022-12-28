@@ -52,3 +52,28 @@
   background-color: white;
   color: black;
 }
+nav {
+  background-color: black;
+  padding: 5px;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display:flex;
+  align-items: center;
+  justify-content: center;
+  
+}
+.link{
+  color:white;
+  margin: 10px;
+}
+.Instructions{
+  padding: 10px;
+}
+.Contact{
+  padding:10px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
