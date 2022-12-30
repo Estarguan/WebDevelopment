@@ -1,7 +1,13 @@
-import React, {useState } from 'react';
+import { Routes,Route} from 'react-router-dom';
 import './App.css';
+import NavBar from './components/NavBar';
+import Contact from './pages/Contact';
+import Instructions from './pages/Instructions';
+import Main  from './pages/main';
+
 
 function App() {
+<<<<<<< HEAD
   const [list, setList] = useState(false);
   const [isShown, setIsShown] = useState(false);
   const [doList, setDoList] = useState([]);
@@ -79,6 +85,17 @@ function App() {
         ))}
       </ol>
     </div>
+=======
+  return (
+    <>
+      <NavBar/>
+      <Routes>
+        <Route path='/' element={<Main/>}/>
+        <Route path='/Instructions' element={<Instructions/>}/>
+        <Route path = 'Contact' element={<Contact/>}/>
+      </Routes>
+    </>
+>>>>>>> refs/remotes/origin/main
   );
 }
 
