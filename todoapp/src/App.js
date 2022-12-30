@@ -31,6 +31,7 @@ function App() {
         updatedDoList[editingIndex] = event.target.value;
         setDoList(updatedDoList);
         setEditingIndex(-1);
+        event.target.value = ''
       }
     }
   };
@@ -41,7 +42,6 @@ function App() {
     setDoList(updatedDoList)
   }
   return (
-
     <div className="App">
       <h1>Welcome to my to do app</h1>
       <section>
@@ -70,6 +70,7 @@ function App() {
       <ol style={{ display: list ? 'inline' : 'none' }}>
         {doList.map((item, i) => (
           <li key={i}>
+            <input type='checkbox'></input>
             {item}
             {/* editing button */}
             <button className='edit-button' onClick={() => setEditingIndex(i)}>Edit</button>
