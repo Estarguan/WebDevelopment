@@ -1,5 +1,7 @@
 import React, {useState, useRef} from 'react';
 import '../App.css';
+import List from './List';
+import Editing from './Editing';
 
 function ToDo() {
   const [list, setList] = useState(false);
@@ -83,6 +85,8 @@ function ToDo() {
     updatedDoList.splice(index,1)
     setDoList(updatedDoList)
   }
+  const shown = isShown ? 'block' : 'none'
+  const edit = editingIndex !== -1 ? 'block' : 'none'
   return (
     <div className="App">
       <h1>Welcome to my to do app</h1>
@@ -94,64 +98,35 @@ function ToDo() {
       <input
         placeholder="Enter Your Task"
         className="input"
-        style={{ display: isShown ? 'block' : 'none' }}
+        style={{ display: shown}}
         type="text"
         onChange={listupdate}
         ref={taskInputRef}
       ></input>
       <input
         className="input"
-        style={{ display: isShown ? 'block' : 'none' }}
+        style={{ display: shown}}
         type="date"
         onChange={dateUpdate}
         ref={dateInputRef}
       ></input>
       <button
-        style={{ display: isShown ? 'block' : 'none' }}
+        style={{ display: shown }}
         className="add-button"
         onClick={addTask}
       >
         Add Task
       </button>
-      {/* editing */}
-      <input
-        placeholder="Edit task"
-        className="input"
-        style={{ display: editingIndex !== -1 ? 'block' : 'none' }}
-        type="text"
-        onKeyDown={editTask}
-        ref={editTaskInputRef}
-      ></input>
-       <input
-        className="input"
-        style={{ display: editingIndex !== -1 ? 'block' : 'none' }}
-        type="date"
-        onKeyDown={editDate}
-        ref={editDateInputRef}
-      ></input>
+      <Editing edit={edit} editTaskInputRef={editTaskInputRef} editDate={editDate} editTask={editTask} editDateInputRef={editDateInputRef} />
       <button
-        style={{display:editingIndex !== -1 || isShown ? 'block':'none'}} 
+        style={{display:editingIndex !== -1 || isShown ? 'block':'none'}} //refactor later  
         className='cancel-button'
         onClick={cancel}
         >
           <strong>Cancel</strong>
       </button>
       {/* displaying */}
-      <ol style={{ display: list ? 'inline' : 'none' }}>
-        {doList.map((item, i) => (
-          <li key={i}>
-            <b>{item.task}</b> <br />
-            <i>{item.date}</i>
-            {/* editing button */}
-            <button className="edit-button" onClick={() => setEditingIndex(i)}>
-              Edit
-            </button>
-            <button className="edit-button" onClick={() => { remove(i); }}>
-              Remove
-            </button>
-          </li>
-        ))}
-      </ol>
+      <List doList={doList} list={list} remove={remove} setEditingIndex={setEditingIndex} />
     </div>
   );
 }
