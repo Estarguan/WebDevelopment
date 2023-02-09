@@ -1,0 +1,19 @@
+html {
+  background-color: black;
+}
+.App {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+.increase-button {
+  margin: 20px;
+  padding: 10px;
+  background-color: white;
+  border-radius: 20%;
+}
+p {
+  font-size: xx-large;
+  color: white;
+}
