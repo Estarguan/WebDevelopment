@@ -1,2 +1,2 @@
-let num : number = 20;
-num = 'Estar';
+let num: number = 20;
+num = 3;
