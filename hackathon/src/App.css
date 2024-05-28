@@ -28,6 +28,17 @@
 .home-btn:hover {
   background-color: #405ba8; /* Darken the background color on hover */
 }
+.answer-btn {
+  background-color: #6481d2;
+  color: white;
+  padding: 10px 20px;
+  font-size: 18px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  margin-top: 10px; /* Add margin between each button */
+}
 
 /* App.css */
 .back-btn {
@@ -69,6 +80,18 @@
   align-items: center;
 }
 
+.points {
+  background-color: #6481d2;
+  margin-right: 20px;
+  padding: 10px;
+  position: fixed;
+  top: 0;
+  right: 0;
+  color: white;
+  border: none;
+  border-radius: 20px;
+}
+
 .game-screen h1 {
   color: black;
   /* padding: 10px 20px; */
@@ -80,7 +103,7 @@
   color: black;
   margin: 0;
   /* padding: 10px 20px; */
-  font-size: 15px;
+  font-size: 40px;
   border-radius: 5px;
   margin-bottom: 150px; /* Adjust the top margin to move the text further up */
 }

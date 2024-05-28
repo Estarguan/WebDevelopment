@@ -1,12 +1,15 @@
+//const axios = require("axios");
 import axios from "axios";
 
-async function fetchTriviaQuestions(category, amount) {
+async function fetchTriviaQuestions(category) {
   try {
-    const response = await axios.get("https://opentdb.com/api.php", {
+    const response = await axios.get("https://api.opexams.com", {
       params: {
-        amount: amount,
-        category: category,
-        type: "multiple", // Specify multiple-choice questions
+        "api-key": "e22rXXo43vmsNIPN8zmgSWyUI8aoJ5I",
+        type: "topicBased",
+        difficuly: "medium",
+        topic: category,
+        questionType: "MCQ", // Specify multiple-choice questions
       },
     });
 
